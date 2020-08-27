@@ -4,12 +4,14 @@ signal hit
 export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
-# Called when the node enters the scene tree for the first time.
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
+	
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
-
-
 
 func _process(delta):
 	var velocity = Vector2()
@@ -43,8 +45,3 @@ func _on_Player_body_entered(body):
 	hide()
 	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true)
-
-func start(pos):
-	position = pos
-	show()
-	$CollisionShape2D.disabled = false
